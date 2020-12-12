@@ -1,3 +1,8 @@
+/**
+ * @author: lencx
+ * @create_at: Dec 12, 2020
+ */
+
 import React, { FC, Suspense } from 'react';
 import { Redirect, Route } from 'react-router-dom';
 
