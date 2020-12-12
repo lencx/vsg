@@ -1,13 +1,21 @@
-import React, { FC } from 'react';
-import Header from '../Header';
+import React, { StrictMode, FC } from 'react';
+import { BrowserRouter } from 'react-router-dom';
+import { GhProvider } from 'github';
+import Router, { RouteOption } from 'router/Router';
 
-export interface AppProps {}
+export interface AppProps {
+  routes: RouteOption[];
+}
 
-const App: FC<AppProps> = () => {
+const App: FC<AppProps> = ({ routes }) => {
   return (
-    <div>
-      <Header />
-    </div>
+    <StrictMode>
+      <GhProvider>
+        <BrowserRouter>
+          <Router routes={routes} />
+        </BrowserRouter>
+      </GhProvider>
+    </StrictMode>
   );
 };
 

@@ -40,49 +40,16 @@
         "category": "abc"
       }
     ],
-    "configuration": {
-      "type": "object",
-      "title": "VS Code Github Trending Configuration",
-      "properties": {
-        "vscode-github.trending.languages": {
-          "type": "array",
-          "default": [
-            "c++",
-            "css",
-            "go",
-            "html",
-            "javascript",
-            "java",
-            "php",
-            "python",
-            "ruby",
-            "rust",
-            "typescript"
-          ],
-          "description": "Names of the preferred languages"
-        },
-        "vscode-github.trending.selectedLanguage": {
-          "type": "string",
-          "default": "go",
-          "description": "Selected language"
-        },
-        "vscode-github.trending.selectedInterval": {
-          "type": "string",
-          "enum": [
-            "daily",
-            "weekly",
-            "monthly"
-          ],
-          "default": "monthly",
-          "description": "Selected time interval (daily, weekly or monthly)"
-        }
-      }
-    }
+    "configuration": {}
   },
   "dependencies": {
     "@material-ui/core": "^4.11.2",
+    "@octokit/core": "^3.2.4",
+    "dayjs": "^1.9.7",
     "react": "^17.0.1",
-    "react-dom": "^17.0.1"
+    "react-dom": "^17.0.1",
+    "react-router": "^5.2.0",
+    "react-router-dom": "^5.2.0"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^5.11.4",
@@ -90,10 +57,12 @@
     "@testing-library/user-event": "^12.1.10",
     "@types/glob": "^7.1.3",
     "@types/jest": "^26.0.15",
+    "@types/lodash": "^4.14.165",
     "@types/mocha": "^8.0.0",
     "@types/node": "^12.0.0",
     "@types/react": "^16.9.53",
     "@types/react-dom": "^16.9.8",
+    "@types/react-router-dom": "^5.1.6",
     "@types/vscode": "^1.51.0",
     "@typescript-eslint/eslint-plugin": "^4.1.1",
     "@typescript-eslint/parser": "^4.1.1",
