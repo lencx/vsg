@@ -1,6 +1,6 @@
 {
   "name": "vscode-github",
-  "displayName": "VSGH",
+  "displayName": "vsgh",
   "description": "Explore Github repositories directly from Visual Studio Code.",
   "version": "0.0.1",
   "publisher": "lencx",
@@ -20,7 +20,7 @@
   "homepage": "https://github.com/lencx/vscode-github",
   "repository": "git@github.com:lencx/vscode-github.git",
   "engines": {
-    "vscode": "^1.50.0"
+    "vscode": "^1.51.0"
   },
   "bugs": {
     "url": "https://github.com/lencx/github/issues"
@@ -65,7 +65,7 @@
     "@types/react": "^16.9.53",
     "@types/react-dom": "^16.9.8",
     "@types/react-router-dom": "^5.1.6",
-    "@types/vscode": "^1.50.0",
+    "@types/vscode": "^1.51.0",
     "@typescript-eslint/eslint-plugin": "^4.1.1",
     "@typescript-eslint/parser": "^4.1.1",
     "eslint": "^7.9.0",
