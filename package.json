@@ -1,6 +1,6 @@
 {
   "name": "vscode-github",
-  "displayName": "vscode-github",
+  "displayName": "VSGH",
   "description": "Explore Github repositories directly from Visual Studio Code.",
   "version": "0.0.1",
   "publisher": "lencx",
@@ -29,15 +29,15 @@
     "Other"
   ],
   "activationEvents": [
-    "onCommand:vscode-github.start"
+    "onCommand:vsgh.start"
   ],
   "main": "./build/ext-src/extension.js",
   "contributes": {
     "commands": [
       {
-        "command": "vscode-github.start",
+        "command": "vsgh.start",
         "title": "Open Github Trending",
-        "category": "abc"
+        "category": "vsgh"
       }
     ],
     "configuration": {}
@@ -105,7 +105,7 @@
     }
   },
   "lint-staged": {
-    "*.ts": "eslint --cache --fix",
-    "*.{js,css,md}": "prettier --write"
+    "*.{ts,tsx}": "eslint --cache --fix",
+    "*.{js,scss,css,md}": "prettier --write"
   }
 }

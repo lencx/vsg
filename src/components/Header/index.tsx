@@ -3,7 +3,7 @@
  * @create_at: Dec 13, 2020
  */
 
-import React, { FC } from 'react';
+import React, { FC, useEffect } from 'react';
 import { Card, CardContent, TextField } from '@material-ui/core';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import { makeStyles, createStyles } from '@material-ui/core/styles';
@@ -13,7 +13,7 @@ import ListIcon from '@material-ui/icons/ListAltOutlined';
 
 import SplitButton from 'components/SplitButton';
 import GitHubLangs from 'components/GitHubLangs';
-import { useGhState, useGhDispatch, ghColors } from 'github';
+import { useGhState, useGhDispatch, ghColors, useTrending } from 'github';
 import { langColors } from 'utils/tools';
 
 import './index.scss';
@@ -51,6 +51,11 @@ const Header: FC<HeaderProps> = () => {
   const classes = useStyles();
   // const dispatch = useGhDispatch();
   // const ghState = useGhState();
+  const [fetch] = useTrending();
+
+  useEffect(() => {
+    fetch({});
+  }, []);
 
   const [selectLang, setSelectLang] = React.useState<string>('');
 

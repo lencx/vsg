@@ -8,7 +8,7 @@ import React, { createContext, useContext, useReducer } from 'react';
 // import cloneDeep from 'lodash/cloneDeep';
 
 type GhAction = {
-  type: 'setData';
+  type: 'setData' | 'trending';
   payload: any;
 };
 type GhDispatch = (action: GhAction) => void;
@@ -28,6 +28,9 @@ const ghReducer = (state: GhState, action: GhAction) => {
   switch (action.type) {
     // set data
     case 'setData': {
+      return { ...state, ...action.payload };
+    }
+    case 'trending': {
       return { ...state, ...action.payload };
     }
     default: {

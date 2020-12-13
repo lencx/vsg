@@ -3,8 +3,11 @@ import * as path from 'path';
 
 export function activate(context: vscode.ExtensionContext) {
   context.subscriptions.push(
-    vscode.commands.registerCommand('vscode-github.start', () => {
-      ViewPanel.createOrShow(context.extensionUri);
+    vscode.commands.registerCommand('vsgh.start', () => {
+      const panel: any = ViewPanel.createOrShow(context.extensionUri);
+
+      const config = vscode.workspace.getConfiguration('vsgh');
+      panel.sendConfig(config);
     })
   );
 
@@ -58,11 +61,19 @@ class ViewPanel {
         enableScripts: true,
 
         // And restrict the webview to only loading content from our extension's `build` directory.
-        localResourceRoots: [vscode.Uri.joinPath(extensionUri, 'build')],
+        // localResourceRoots: [vscode.Uri.joinPath(extensionUri, 'build')],
       }
     );
 
     ViewPanel.currentPanel = new ViewPanel(panel, extensionUri);
+
+    return ViewPanel.currentPanel;
+  }
+
+  public sendConfig(config: any) {
+    // Send a message to the webview webview.
+    // You can send any JSON serializable data.
+    this._panel.webview.postMessage({ command: 'configuration', config });
   }
 
   public static revive(panel: vscode.WebviewPanel, extensionUri: vscode.Uri) {
