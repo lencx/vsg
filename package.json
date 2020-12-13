@@ -7,12 +7,12 @@
   "author": "lencx <cxin1314@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "vscode:prepublish": "yarn run build",
+    "vscode:prepublish": "npm run build",
     "compile": "tsc -p tsconfig.extension.json",
     "watch": "tsc -watch -p tsconfig.extension.json",
-    "pretest": "yarn run compile && yarn run lint",
+    "pretest": "npm run compile && npm run lint",
     "start": "react-scripts start",
-    "build": "./scripts/build-non-split.js && yarn run compile",
+    "build": "./scripts/build-non-split.js && npm run compile",
     "test": "node ./build/test/runTest.js",
     "lint": "eslint src --ext ts",
     "eject": "react-scripts eject"
