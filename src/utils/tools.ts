@@ -6,4 +6,4 @@
 import { ghColors } from 'github';
 
 export const langColors = (lang: string = ''): string =>
-  ((ghColors as any)[lang] || {}).color || '#333';
+  ((ghColors as any)[lang] || {}).color || '#fff';

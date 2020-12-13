@@ -31,7 +31,7 @@ const RepoIcon: FC<RepoIconProps> = ({ size, color }) => {
 
 RepoIcon.defaultProps = {
   size: 20,
-  color: '#333',
+  color: '#666',
 };
 
 export default RepoIcon;

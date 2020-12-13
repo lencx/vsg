@@ -1,0 +1,32 @@
+.selectRoot {
+  display: inline-block;
+  // margin: 10px;
+  // margin-left: 0;
+  vertical-align: 8px;
+  margin-right: 10px;
+  .MuiFormControl-root, .MuiInput-root {
+    margin: 0;
+  }
+}
+
+#select-lang-label {
+  font-size: 12px !important;
+  top: -12px;
+
+  .MuiInput-input {
+    font-size: 12px !important;
+  }
+}
+
+.ghfbtn {
+  z-index: 99;
+  margin-right: 10px;
+
+  .MuiButton-label,
+  .MuiListItem-root {
+    text-transform: none;
+    svg {
+      margin-right: 5px;
+    }
+  }
+}

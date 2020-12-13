@@ -31,7 +31,7 @@ const ForksIcon: FC<ForksIconProps> = ({ size, color }) => {
 
 ForksIcon.defaultProps = {
   size: 16,
-  color: '#333',
+  color: '#666',
 };
 
 export default ForksIcon;

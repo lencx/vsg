@@ -31,7 +31,7 @@ const StarsIcon: FC<StarsIconProps> = ({ size, color }) => {
 
 StarsIcon.defaultProps = {
   size: 16,
-  color: '#333',
+  color: '#666',
 };
 
 export default StarsIcon;

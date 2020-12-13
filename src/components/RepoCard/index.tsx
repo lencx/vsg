@@ -15,7 +15,7 @@ import {
   Tooltip,
   Chip,
 } from '@material-ui/core';
-import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
+import { makeStyles, createStyles } from '@material-ui/core/styles';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 
 import RepoIcon from 'components/Icons/RepoIcon';
@@ -24,7 +24,7 @@ import ForksIcon from 'components/Icons/ForksIcon';
 import IssuesIcon from 'components/Icons/IssuesIcon';
 import { langColors } from 'utils/tools';
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles(() =>
   createStyles({
     root: {
       height: '100%',
@@ -59,14 +59,14 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     lang: {
       color: '#fff',
-      textShadow: '1px 1px 1px #222',
-      border: 'solid 2px rgba(27, 31, 35, 0.3)',
+      textShadow: '1px 1px 1px #666',
+      border: 'solid 2px rgba(27, 31, 35, 0.1)',
       boxSizing: 'border-box',
-      fontSize: '0.45rem',
+      fontSize: '0.4rem',
       fontWeight: 'bold',
-      padding: '1px 3px 2px',
+      padding: '0 4px 2px',
       textAlign: 'center',
-      borderRadius: 8,
+      borderRadius: 10,
       minWidth: 20,
       marginRight: 30,
     },
@@ -74,6 +74,7 @@ const useStyles = makeStyles((theme: Theme) =>
       fontSize: '0.7rem',
       border: 'none',
       marginLeft: 10,
+      color: '#666',
     },
   })
 );
@@ -89,6 +90,24 @@ export interface RepoCardProps {
   forks?: number;
   openIssues?: number;
 }
+export interface GhBtnProps {
+  className?: string;
+  icon?: React.ReactElement;
+  count?: number;
+}
+
+const GhBtn: FC<GhBtnProps> = ({ icon, count }) => {
+  const classes = useStyles();
+  return count ? (
+    <Chip
+      className={classes.ghbtn}
+      size="small"
+      avatar={icon}
+      variant="outlined"
+      label={<b>{count}</b>}
+    />
+  ) : null;
+};
 
 const RepoCard: FC<RepoCardProps> = (props) => {
   const {
@@ -144,23 +163,6 @@ const RepoCard: FC<RepoCardProps> = (props) => {
         </Tooltip>
       </CardContent>
       <CardActions>
-        {/* {lang && <Chip
-          className={classes.lang}
-          size="small"
-          avatar={
-            <Avatar style={{
-              background: langColors(lang),
-              color: '#fff',
-              textShadow: '0 0 0 1px #000',
-              border: 'solid 2px rgba(27, 31, 35, 0.1)',
-              boxSizing: 'border-box',
-            }}>
-              {lang?.charAt(0)}
-            </Avatar>
-          }
-          variant="outlined"
-          label={<b>{lang}</b>}
-        />} */}
         {lang && (
           <span
             className={classes.lang}
@@ -168,28 +170,9 @@ const RepoCard: FC<RepoCardProps> = (props) => {
             {lang}
           </span>
         )}
-
-        <Chip
-          className={classes.ghbtn}
-          size="small"
-          avatar={<StarsIcon />}
-          variant="outlined"
-          label={<b>{stars}</b>}
-        />
-        <Chip
-          className={classes.ghbtn}
-          size="small"
-          avatar={<ForksIcon />}
-          variant="outlined"
-          label={<b>{forks}</b>}
-        />
-        <Chip
-          className={classes.ghbtn}
-          size="small"
-          avatar={<IssuesIcon />}
-          variant="outlined"
-          label={<b>{openIssues}</b>}
-        />
+        <GhBtn icon={<StarsIcon />} count={stars} />
+        <GhBtn icon={<ForksIcon />} count={forks} />
+        <GhBtn icon={<IssuesIcon />} count={openIssues} />
       </CardActions>
     </Card>
   );

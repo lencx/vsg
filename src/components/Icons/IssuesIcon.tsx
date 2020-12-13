@@ -31,7 +31,7 @@ const IssuesIcon: FC<IssuesIconProps> = ({ size, color }) => {
 
 IssuesIcon.defaultProps = {
   size: 16,
-  color: '#333',
+  color: '#666',
 };
 
 export default IssuesIcon;

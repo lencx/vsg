@@ -5,8 +5,9 @@
 
 import React from 'react';
 import { Grid } from '@material-ui/core';
-import RepoCard from 'components/RepoCard';
 import { GhRepo } from 'github/type';
+import RepoCard from 'components/RepoCard';
+import Header from 'components/Header';
 
 import data from './data.test.json';
 
@@ -15,6 +16,7 @@ const repos = data.items as GhRepo[];
 const HomeView = () => {
   return (
     <div className="page-container">
+      <Header />
       <Grid container spacing={2}>
         {repos.map((item: GhRepo) => {
           return (
