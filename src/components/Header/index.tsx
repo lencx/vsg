@@ -7,6 +7,7 @@ import GridIcon from '@material-ui/icons/GridOnOutlined';
 import ListIcon from '@material-ui/icons/ListAltOutlined';
 
 import SplitButton from 'components/SplitButton';
+import GitHubLangs from 'components/GitHubLangs';
 import { useGhState, useGhDispatch, ghColors } from 'github';
 import { langColors } from 'utils/tools';
 
@@ -55,7 +56,8 @@ const Header: FC<HeaderProps> = () => {
   return (
     <Card className={classes.head}>
       <CardContent>
-        <Autocomplete
+        <GitHubLangs langs={Object.keys(ghColors) as string[]} />
+        {/* <Autocomplete
           id="select-lang"
           autoHighlight
           clearOnBlur
@@ -84,7 +86,7 @@ const Header: FC<HeaderProps> = () => {
               // variant="outlined"
             />
           )}
-        />
+        /> */}
 
         <SplitButton
           className="ghfbtn"

@@ -56,7 +56,9 @@ const SplitButton: FC<SplitButtonProps> = ({
   };
 
   return (
-    <div style={{ display: 'inline-block' }} className={className}>
+    <div
+      style={{ display: 'inline-block', verticalAlign: 'middle' }}
+      className={className}>
       <ButtonGroup
         variant="contained"
         color="primary"
