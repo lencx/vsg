@@ -38,11 +38,12 @@ const App: FC<AppProps> = ({ routes }) => {
   useEffect(() => {
     window.addEventListener('message', handleMsg);
     const config = window.localStorage.getItem('vsgh');
+
     if (config) {
       try {
         const conf = JSON.parse(config);
         if (conf.token) {
-          // setHasToken(true);
+          setHasToken(true);
           setLoading(false);
         }
       } catch (e) {}

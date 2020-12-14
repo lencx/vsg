@@ -1,4 +1,6 @@
-# vscode-github
+# vsgh
+
+> Explore Github repositories directly from Visual Studio Code.
 
 ## Features
 

@@ -19,7 +19,8 @@ import {
   Divider,
   Chip,
 } from '@material-ui/core';
-import SettingsIcon from '@material-ui/icons/Settings';
+// import SettingsIcon from '@material-ui/icons/Settings';
+import FilterListIcon from '@material-ui/icons/FilterList';
 import CloseIcon from '@material-ui/icons/Close';
 import DoneIcon from '@material-ui/icons/Done';
 import IconButton from '@material-ui/core/IconButton';
@@ -157,7 +158,7 @@ const GitHubLangs: FC<GitHubLangsProps> = (props) => {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const [value, setValue] = React.useState<string[]>([]);
-  const theme = useTheme();
+  // const theme = useTheme();
 
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
@@ -202,7 +203,7 @@ const GitHubLangs: FC<GitHubLangsProps> = (props) => {
         onClick={handleClick}
         variant="contained"
         color="primary">
-        <SettingsIcon />
+        <FilterListIcon />
         <span className={classes.langbtn}>Languages</span>
       </Button>
       <Popper

@@ -1,29 +1,32 @@
 {
-  "name": "vscode-github",
-  "displayName": "vsgh",
+  "name": "vsgh",
+  "displayName": "GitHub - Explore & Trending",
   "description": "Explore Github repositories directly from Visual Studio Code.",
   "version": "0.0.1",
   "publisher": "lencx",
   "author": "lencx <cxin1314@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "vscode:prepublish": "npm run build",
+    "pack": "vsce package --yarn",
+    "pub": "vsce publish --yarn",
+    "vscode:prepublish": "yarn run build",
     "compile": "tsc -p tsconfig.extension.json",
     "watch": "tsc -watch -p tsconfig.extension.json",
-    "pretest": "npm run compile && npm run lint",
+    "pretest": "yarn run compile && yarn run lint",
     "start": "react-scripts start",
-    "build": "./scripts/build-non-split.js && npm run compile",
+    "build": "./scripts/build-non-split.js && yarn run compile",
     "test": "node ./build/test/runTest.js",
     "lint": "eslint src --ext ts",
     "eject": "react-scripts eject"
   },
-  "homepage": "https://github.com/lencx/vscode-github",
-  "repository": "git@github.com:lencx/vscode-github.git",
+  "icon": "./build/vsgh.png",
+  "homepage": "https://github.com/lencx/vsgh",
+  "repository": "git@github.com:lencx/vsgh.git",
   "engines": {
     "vscode": "^1.51.0"
   },
   "bugs": {
-    "url": "https://github.com/lencx/github/issues"
+    "url": "https://github.com/lencx/vsgh/issues"
   },
   "categories": [
     "Other"
@@ -32,11 +35,12 @@
     "onCommand:vsgh.start"
   ],
   "main": "./build/ext-src/extension.js",
+  "keywords": ["vscode", "extension", "github", "vsgh", "trending"],
   "contributes": {
     "commands": [
       {
         "command": "vsgh.start",
-        "title": "Open Github Trending",
+        "title": "Open Github Explore",
         "category": "vsgh"
       }
     ],

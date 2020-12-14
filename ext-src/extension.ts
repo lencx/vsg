@@ -54,7 +54,7 @@ class ViewPanel {
     // Otherwise, create a new panel.
     const panel = vscode.window.createWebviewPanel(
       ViewPanel.viewType,
-      'Github',
+      'GitHub',
       column || vscode.ViewColumn.One,
       {
         // Enable javascript in the webview
@@ -154,9 +154,10 @@ class ViewPanel {
 					Use a content security policy to only allow loading images from https or from our extension directory,
 					and only allow scripts that have a specific nonce.
 				-->
-				<meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="icon" href="./vsgh.png" />
 				<link href="${mainStyle}" rel="stylesheet">
-				<title>vscode github</title>
+				<title>GitHub</title>
 				<base href="${buildPathOnDisk}/">
 			</head>
 			<body>
