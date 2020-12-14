@@ -2,7 +2,7 @@
   "name": "vsgh",
   "displayName": "GitHub - Explore & Trending",
   "description": "Explore Github repositories directly from Visual Studio Code.",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "publisher": "lencx",
   "author": "lencx <cxin1314@gmail.com>",
   "license": "MIT",
