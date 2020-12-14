@@ -4,7 +4,8 @@
   // margin-left: 0;
   vertical-align: 8px;
   margin-right: 10px;
-  .MuiFormControl-root, .MuiInput-root {
+  .MuiFormControl-root,
+  .MuiInput-root {
     margin: 0;
   }
 }
@@ -20,7 +21,7 @@
 
 .ghfbtn {
   z-index: 99;
-  margin-left: 10px;
+  // margin-left: 10px;
 
   .MuiButton-label,
   .MuiListItem-root {

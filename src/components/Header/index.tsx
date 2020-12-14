@@ -4,7 +4,7 @@
  */
 
 import React, { FC, useEffect } from 'react';
-import { Card, CardContent, TextField } from '@material-ui/core';
+import { Avatar, Card, CardContent, Grid } from '@material-ui/core';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import { makeStyles, createStyles } from '@material-ui/core/styles';
 import DateRangeIcon from '@material-ui/icons/DateRangeOutlined';
@@ -15,6 +15,7 @@ import SplitButton from 'components/SplitButton';
 import GitHubLangs from 'components/GitHubLangs';
 import { useGhState, useGhDispatch, ghColors, useTrending } from 'github';
 import { langColors } from 'utils/tools';
+import LogoIcon from './vsgh-logo.png';
 
 import './index.scss';
 
@@ -22,6 +23,9 @@ const useStyles = makeStyles(() =>
   createStyles({
     head: {
       marginBottom: 20,
+    },
+    logo: {
+      // display: 'in'
     },
     color: {
       display: 'inline-block',
@@ -45,6 +49,11 @@ const useStyles = makeStyles(() =>
   })
 );
 
+const layoutType = [
+  { label: <><GridIcon fontSize="small" /> Grid</>, value: 'grid' },
+  { label: <><ListIcon fontSize="small" /> List</>, value: 'list' },
+];
+
 export interface HeaderProps {}
 
 const Header: FC<HeaderProps> = () => {
@@ -66,7 +75,41 @@ const Header: FC<HeaderProps> = () => {
   return (
     <Card className={classes.head}>
       <CardContent>
-        <GitHubLangs langs={Object.keys(ghColors) as string[]} />
+        <Grid
+          container
+          direction="row"
+          justify="space-between"
+          alignItems="center"
+        >
+          <Grid item>
+            <Avatar className={classes.logo} alt="logo" variant="square" src={LogoIcon} />
+          </Grid>
+          <Grid item>
+            <Grid item container spacing={1}>
+              <Grid item>
+                <GitHubLangs langs={Object.keys(ghColors) as string[]} />
+              </Grid>
+              <Grid item>
+                <SplitButton
+                  className="ghfbtn"
+                  extra={<DateRangeIcon fontSize="small" />}
+                  options={[
+                    { label: 'Yearly', value: 'yearly' },
+                    { label: 'Monthly', value: 'monthly' },
+                    { label: 'Weekly', value: 'weekly' },
+                    { label: 'Daily', value: 'daily' },
+                  ]}
+                />
+              </Grid>
+              <Grid item>
+                <SplitButton
+                  className="ghfbtn"
+                  options={layoutType}
+                />
+              </Grid>
+            </Grid>
+          </Grid>
+        </Grid>
         {/* <Autocomplete
           id="select-lang"
           autoHighlight
@@ -97,38 +140,6 @@ const Header: FC<HeaderProps> = () => {
             />
           )}
         /> */}
-
-        <SplitButton
-          className="ghfbtn"
-          extra={<DateRangeIcon />}
-          options={[
-            { label: 'Yearly', value: 'yearly' },
-            { label: 'Monthly', value: 'monthly' },
-            { label: 'Weekly', value: 'weekly' },
-            { label: 'Daily', value: 'daily' },
-          ]}
-        />
-        <SplitButton
-          className="ghfbtn"
-          options={[
-            {
-              label: (
-                <>
-                  <GridIcon /> Grid
-                </>
-              ),
-              value: 'grid',
-            },
-            {
-              label: (
-                <>
-                  <ListIcon /> List
-                </>
-              ),
-              value: 'list',
-            },
-          ]}
-        />
       </CardContent>
     </Card>
   );

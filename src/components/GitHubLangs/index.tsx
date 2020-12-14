@@ -202,8 +202,9 @@ const GitHubLangs: FC<GitHubLangsProps> = (props) => {
         aria-describedby={id}
         onClick={handleClick}
         variant="contained"
+        size="small"
         color="primary">
-        <FilterListIcon />
+        <FilterListIcon fontSize="small" />
         <span className={classes.langbtn}>Languages</span>
       </Button>
       <Popper

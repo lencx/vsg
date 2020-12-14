@@ -13,6 +13,7 @@ import {
   Popper,
   MenuItem,
   MenuList,
+  Divider,
 } from '@material-ui/core';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 
@@ -68,11 +69,8 @@ const SplitButton: FC<SplitButtonProps> = ({
         variant="contained"
         color="primary"
         ref={anchorRef}
+        size="small"
         aria-label="split button">
-        <Button onClick={handleClick}>
-          {extra}
-          {options[selectedIndex]['label']}
-        </Button>
         <Button
           color="primary"
           size="small"
@@ -81,7 +79,9 @@ const SplitButton: FC<SplitButtonProps> = ({
           aria-label="select merge strategy"
           aria-haspopup="menu"
           onClick={handleToggle}>
-          <ArrowDropDownIcon />
+            {extra}
+            {options[selectedIndex]['label']}
+            {/* <ArrowDropDownIcon /> */}
         </Button>
       </ButtonGroup>
       <Popper
