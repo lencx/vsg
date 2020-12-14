@@ -19,7 +19,7 @@
     "lint": "eslint src --ext ts",
     "eject": "react-scripts eject"
   },
-  "icon": "./build/vsgh.png",
+  "icon": "build/vsgh.png",
   "homepage": "https://github.com/lencx/vsgh",
   "repository": "git@github.com:lencx/vsgh.git",
   "engines": {
