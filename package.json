@@ -2,7 +2,7 @@
   "name": "vsg",
   "displayName": "vsg - GitHub Explore",
   "description": "Explore Github repositories directly from Visual Studio Code.",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "publisher": "lencx",
   "author": "lencx <cxin1314@gmail.com>",
   "license": "MIT",
@@ -35,7 +35,8 @@
     "Other"
   ],
   "activationEvents": [
-    "onCommand:vsg.start"
+    "onCommand:vsg.start",
+    "onView:vsg.panel"
   ],
   "main": "./build/ext-src/extension.js",
   "keywords": ["vscode", "extension", "github", "vsg", "trending"],
@@ -50,9 +51,20 @@
     "viewsContainers": {
       "activitybar": [
         {
-          "id": "vsg-icon",
+          "id": "vsg",
           "title": "vsg 🔥 GitHub",
           "icon": "media/vsg.svg"
+        }
+      ]
+    },
+    "views": {
+      "vsg": [
+        {
+          "type": "webview",
+          "id": "vsg.panel",
+          "name": "vsg 🔥 GitHub",
+          "icon": "media/vsg.svg",
+          "contextualTitle": "vsg 🔥 GitHub"
         }
       ]
     },

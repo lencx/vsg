@@ -6,20 +6,22 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 
 ## Released
 
+### [0.2.0] - 2020-12-21
+
+Added
+- add sidebar icon
+
 ### [0.1.1] - 2020-12-20
 
-#### Fixed
-
+Fixed
 - Fixes empty data ui
 
-#### Docs
-
+Docs
 - add screenshot
 
 ### [0.1.0] - 2020-12-20
 
-#### Added
-
+Added
 - github trending
   - search language
   - date range

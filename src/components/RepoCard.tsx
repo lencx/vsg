@@ -98,12 +98,12 @@ const RepoCard: FC<RepoCardProps> = (props) => {
     <Card className={classes.root}>
       <CardHeader
         avatar={<Avatar aria-label="recipe" src={avatar} />}
-        action={
-          <IconButton aria-label="settings">
-            <MoreVertIcon />
-          </IconButton>
-        }
         title={author}
+        // action={
+        //   <IconButton aria-label="settings">
+        //     <MoreVertIcon />
+        //   </IconButton>
+        // }
         // subheader={}
       />
       <CardContent>

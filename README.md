@@ -11,8 +11,12 @@
 
 ---
 
-![repo grid](readme-pic/vsg-grid.png)
-![repo list](readme-pic/vsg-list.png)
+## Usage
+
+![repo side](https://raw.githubusercontent.com/lencx/vsg/main/readme-pic/vsg-side.png)
+
+1. Click the `Side Bar` button
+2. Press Ctrl+P or Cmd+P and type: `>vsg: Open GitHub Explore`
 
 ## Extension Settings
 
@@ -20,7 +24,7 @@
 - Click Generate Token.
 - You will be presented with the generated token. Copy the token and add it below.
 
-```json
+```json5
 // setting.json
 {
   "vsg": {
@@ -34,12 +38,6 @@
   }
 }
 ```
-
-## Usage
-
-Just press Ctrl+P or Cmd+P and type:
-
-> vsg: Open GitHub Explore
 
 ## Community
 
