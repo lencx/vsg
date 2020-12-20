@@ -9,6 +9,8 @@
   - date range
   - layout
 
+[More Ideas](https://github.com/lencx/vsg/discussions/3)
+
 ---
 
 ## Usage
