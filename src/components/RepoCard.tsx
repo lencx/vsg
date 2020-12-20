@@ -120,7 +120,7 @@ const RepoCard: FC<RepoCardProps> = (props) => {
           color="primary"
           className={classes.repoBtn}
           onClick={handleGoRepo}>
-          <RepoIcon size={18} />
+          <RepoIcon />
           <b className={classes.repoName}>{repoName}</b>
         </Button>
         <Tooltip title={repoDesc || ''}>

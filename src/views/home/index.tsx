@@ -5,25 +5,30 @@
 
 import React, { memo, useEffect } from 'react';
 
-import { GhRepo } from 'github/type';
-import { useGhState, useTrending } from 'github';
+import { useGhDispatch, useGhState } from 'github';
 import Header from 'components/Header';
 import ReopLayout from 'components/ReopLayout';
 
-// import data from './data.test.json';
-// const repos = data.items as GhRepo[];
-
 const HomeView = () => {
-  const ghState: any = useGhState();
-  const [fetch] = useTrending();
+  const dispatch = useGhDispatch();
+  const ghState = useGhState();
+  const config = JSON.parse(window.localStorage.getItem('vsg') || '{}');
 
   useEffect(() => {
-    // fetch({});
+    dispatch({
+      type: 'config',
+      payload: {
+        'search.layout': config['search.layout'] || 'all_languages',
+        'search.range': config['search.range'] || 'weekly',
+        'search.language': config['search.language'] || 'all_languages',
+      }
+    });
   }, []);
 
-  // if (!list) {
-  //   return <div>loading...</div>;
-  // }
+
+  if (!Object.keys(ghState).length) {
+    return <div>Configuration loading...</div>;
+  }
 
   return (
     <div className="page-container">

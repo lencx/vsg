@@ -46,13 +46,7 @@ const ghReducer = (state: GhState, action: GhAction) => {
 };
 
 const GhProvider = ({ children }: GhProviderProps) => {
-  const [state, dispatch] = useReducer(ghReducer, {
-    config: {
-      lang: 'All Languages',
-      range: 'weekly',
-      layout: 'grid',
-    }
-  });
+  const [state, dispatch] = useReducer(ghReducer, {});
 
   return (
     <GhContext.Provider value={state}>

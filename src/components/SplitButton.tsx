@@ -3,7 +3,7 @@
  * @create_at: Dec 13, 2020
  */
 
-import React, { FC } from 'react';
+import React, { FC, useEffect, memo } from 'react';
 import {
   Button,
   ButtonGroup,
@@ -22,6 +22,7 @@ export interface SplitButtonProps {
   options: Array<{ label: React.ReactNode; value: string }>;
   extra?: React.ReactNode;
   onChange?: (e: string) => void;
+  defaultValue?: string;
 }
 
 const SplitButton: FC<SplitButtonProps> = ({
@@ -29,10 +30,22 @@ const SplitButton: FC<SplitButtonProps> = ({
   extra,
   options,
   onChange,
+  defaultValue,
 }) => {
   const [open, setOpen] = React.useState(false);
   const anchorRef = React.useRef<HTMLDivElement>(null);
-  const [selectedIndex, setSelectedIndex] = React.useState(1);
+  const [selectedIndex, setSelectedIndex] = React.useState(0);
+
+  useEffect(() => {
+    let _index = selectedIndex;
+    options.some((i, idx) => {
+      if (i.value === defaultValue) {
+        _index = idx;
+        return;
+      }
+    });
+    setSelectedIndex(_index);
+  }, [defaultValue]);
 
   const handleMenuItemClick = (
     event: React.MouseEvent<HTMLLIElement, MouseEvent>,
@@ -117,4 +130,4 @@ const SplitButton: FC<SplitButtonProps> = ({
   );
 };
 
-export default SplitButton;
+export default memo(SplitButton);

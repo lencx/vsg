@@ -5,6 +5,9 @@
 ## Features
 
 - GitHub Trending
+  - search languages
+  - date range
+  - layout
 
 ## Extension Settings
 
@@ -16,7 +19,13 @@
   // setting.json
   {
     "vsg": {
-      "token": "xxxxxx"
+      "token": "xxxxxx",
+      // layout: grid | list
+      "search.layout": "grid",
+      // search date range: yearly | monthly | weekly | daily
+      "search.range": "weekly",
+      // more languages: vsg/src/github/colors.json
+      "search.language": "all_languages",
     }
   }
   ```
@@ -31,18 +40,6 @@ Just press Ctrl+P or Cmd+P and type:
 
 The vsg community can be found on [GitHub Discussions](https://github.com/lencx/vsg/discussions), where you can ask questions, voice ideas.
 
-## Release Notes
+## Contributors 🙏❤
 
-<!-- Users appreciate release notes as you update your extension. -->
-
-### 0.0.1
-
-Initial
-
-<!-- ## For more information
-
-* [Visual Studio Code's Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
-* [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
-* [GitHub language colors](https://github.com/ozh/github-colors) -->
-
-<!-- **Enjoy!** -->
+- lencx ([@lencx](https://github.com/lencx))

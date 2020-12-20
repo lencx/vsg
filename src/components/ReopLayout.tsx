@@ -3,7 +3,7 @@
  * @create_at: Dec 12, 2020
  */
 
-import React, { memo } from 'react';
+import React, { FC, memo } from 'react';
 import { Paper, Grid, List } from '@material-ui/core';
 
 import { GhRepo } from 'github/type';
@@ -14,10 +14,10 @@ import RepoItem from 'components/RepoItem';
 const RepoLayout = () => {
   const ghState: any = useGhState();
   const list = ghState?.trendingList as GhRepo[];
-  const type = ghState?.config?.layout || 'grid';
+  const type = ghState?.config['search.layout'] || 'grid';
 
   if (!list) {
-    return <div>loading...</div>;
+    return <div style={{ textAlign: 'center', padding: '50px 0', color: '#fff' }}>loading...</div>;
   }
 
   if (type === 'list') {

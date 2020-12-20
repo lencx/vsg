@@ -54,7 +54,7 @@ class ViewPanel {
     // Otherwise, create a new panel.
     const panel = vscode.window.createWebviewPanel(
       ViewPanel.viewType,
-      'GitHub',
+      'vsg 🔥 GitHub',
       column || vscode.ViewColumn.One,
       {
         // Enable javascript in the webview
@@ -157,7 +157,7 @@ class ViewPanel {
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="icon" href="./vsg.png" />
 				<link href="${mainStyle}" rel="stylesheet">
-				<title>GitHub</title>
+				<title>vsg 🔥 GitHub</title>
 				<base href="${buildPathOnDisk}/">
 			</head>
 			<body>

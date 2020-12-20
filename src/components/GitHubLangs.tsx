@@ -3,7 +3,7 @@
  * @create_at: Dec 20, 2020
  */
 
-import React, { FC } from 'react';
+import React, { FC, useEffect } from 'react';
 import {
   fade,
   makeStyles,
@@ -125,18 +125,25 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export interface GitHubLangsProps {
   langs: string[];
+  defaultValue?: string;
   onChange?: (value: string) => void;
 }
 
+const fmtAllLang = (option: string) => option === 'all_languages' ? 'All Languages' : option;
+
 const GitHubLangs: FC<GitHubLangsProps> = (props) => {
-  const { langs, onChange } = props;
+  const { langs, onChange, defaultValue } = props;
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
-  const [value, setValue] = React.useState<string>('All Languages');
+  const [value, setValue] = React.useState<string>('');
 
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
   };
+
+  useEffect(() => {
+    setValue(defaultValue as string);
+  }, [defaultValue]);
 
   const handleClose = (
     event: React.ChangeEvent<{}>,
@@ -162,7 +169,7 @@ const GitHubLangs: FC<GitHubLangsProps> = (props) => {
         size="small"
         color="primary">
         <FilterListIcon fontSize="small" />
-        <span className={classes.langbtn}>{value || 'selecting'}</span>
+        <span className={classes.langbtn}>{fmtAllLang(value) || 'selecting'}</span>
       </Button>
       <Popper
         id={id}
@@ -190,15 +197,17 @@ const GitHubLangs: FC<GitHubLangsProps> = (props) => {
           }}
           // disableCloseOnSelect
           disablePortal
-          renderTags={() => null}
+          // renderTags={() => null}
           noOptionsText="No Languages"
           renderOption={(option, { selected }) => (
             <>
-              {option !== 'All Languages' ? <span
+              {option !== 'all_languages' ? <span
                 className={classes.color}
                 style={{ backgroundColor: langColors(option) }}
               /> : <span className={classes.all}>❖</span>}
-              <div className={classes.text}>{option}</div>
+              <div className={classes.text}>
+                {fmtAllLang(option)}
+              </div>
               <DoneIcon
                 color="primary"
                 className={classes.iconSelected}
@@ -206,8 +215,8 @@ const GitHubLangs: FC<GitHubLangsProps> = (props) => {
               />
             </>
           )}
-          options={['All Languages', ...langs]}
-          getOptionLabel={(option) => option}
+          options={['all_languages', ...langs]}
+          getOptionLabel={fmtAllLang}
           // disabled={}
           renderInput={(params) => {
             return (
@@ -226,6 +235,10 @@ const GitHubLangs: FC<GitHubLangsProps> = (props) => {
       </Popper>
     </>
   );
+};
+
+GitHubLangs.defaultProps = {
+  defaultValue: 'all_languages',
 };
 
 export default GitHubLangs;

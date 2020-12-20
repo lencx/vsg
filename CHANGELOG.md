@@ -4,6 +4,15 @@ All notable changes to the "vsg" extension will be documented in this file.
 
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
+## Released
+
+### [0.1.0] - 2020-12-20
+
+- github trending
+  - search language
+  - date range
+  - layout
+
 ## [Unreleased]
 
 ### [0.0.2] - 2020-12-13

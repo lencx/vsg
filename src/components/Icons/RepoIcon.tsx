@@ -12,7 +12,7 @@ export interface RepoIconProps {
 
 const RepoIcon: FC<RepoIconProps> = ({ size, color }) => {
   return (
-    <i className="repoicon" style={{ fontStyle: 'normal', display: 'flex' }}>
+    <i className="repoicon" style={{ fontStyle: 'normal', display: 'inline-block', width: size, height: size, verticalAlign: -4 }}>
       <svg
         viewBox="0 0 16 16"
         version="1.1"
@@ -30,7 +30,7 @@ const RepoIcon: FC<RepoIconProps> = ({ size, color }) => {
 };
 
 RepoIcon.defaultProps = {
-  size: 20,
+  size: 16,
   color: '#666',
 };
 

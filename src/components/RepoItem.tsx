@@ -3,6 +3,7 @@ import { createStyles, Theme, makeStyles } from '@material-ui/core/styles';
 import { Avatar, ListItem, ListItemAvatar, ListItemText, Typography, Divider } from '@material-ui/core';
 import { RepoInfo } from 'github/type';
 import RepoActions from 'components/RepoActions';
+import RepoIcon from 'components/Icons/RepoIcon';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -58,9 +59,9 @@ const RepoList: FC<RepoListProps> = (props) => {
                 className={classes.inline}
                 color="textPrimary"
               >
-                [{repoName}]{' '}
+                <RepoIcon />{' '}{repoName}
               </Typography>
-              <span>{repoDesc}</span>
+              {repoDesc && <span style={{ margin: '5px 0 0 10px' }}>{repoDesc}</span>}
             </>
           }
         />

@@ -6,13 +6,11 @@
 import { Octokit } from '@octokit/core';
 import dayjs from 'dayjs';
 
-import { useGhDispatch } from './GhStore';
-
-export {};
+import { useGhState, useGhDispatch } from './GhStore';
 
 export type transformFilters = {
-  lang?: string;
-  date?: string;
+  language?: string;
+  range?: string;
 };
 export type ghSearchQuery = {
   q: string;
@@ -20,32 +18,46 @@ export type ghSearchQuery = {
   order: 'desc';
 };
 
-const transformFilters = (filters: transformFilters) => {
-  // let params = {} as ghSearchQuery;
-  const startMoment = dayjs('2020-10-20');
-  const endMoment = dayjs();
-  const reposDate = `created:${startMoment.format()}..${endMoment.format()}`.replace(
-    /\+/g,
-    '%2B'
-  );
-  const reposLang = filters.lang ? `language:${filters.lang} ` : '';
+const getStart = (type: string = 'weekly') => {
+  const range: any = {
+    yearly: dayjs().subtract(1, 'year').format('YYYY-MM-DD'),
+    monthly: dayjs().subtract(1, 'month').format('YYYY-MM-DD'),
+    weekly: dayjs().subtract(1, 'week').format('YYYY-MM-DD'),
+    daily: dayjs().subtract(1, 'day').format('YYYY-MM-DD'),
+  };
+  return range[type];
+};
 
-  return reposLang + reposDate;
+const transformQuery = (filters: transformFilters) => {
+  const reposDate = `created:${getStart(filters.range)}..${dayjs().format('YYYY-MM-DD')}`;
+  const reposLang = filters.language !== 'all_languages' ? `language:"${filters.language}" ` : '';
+  return encodeURIComponent(reposLang + reposDate);
 };
 
 export const useTrending = () => {
-  const data = window.localStorage.getItem('vsg') || '{}';
-
-  const octokit = new Octokit({ auth: JSON.parse(data).token });
+  const ghState: any = useGhState();
   const dispatch = useGhDispatch();
-  const req = async (data: transformFilters) => {
+
+  const octokit = new Octokit({ auth: ghState?.token });
+
+  const config = ghState?.config || {};
+
+  const req = async (data: any = {}) => {
     dispatch({
       type: 'setData',
-      payload: { trendingLoading: true },
+      payload: { trendingLoading: true, trendingList: null },
     });
     try {
+      let query = { language: config['search.language'], range: config['search.range'] };
+      if (data['search.language']) {
+        query.language = data['search.language'];
+      }
+      if (data['search.range']) {
+        query.range = data['search.range'];
+      }
+
       const res = await octokit.request(
-        `GET /search/repositories?q=${transformFilters(data)}`,
+        `GET /search/repositories?q=${transformQuery(query)}`,
         {
           sort: 'stars',
           order: 'desc',
@@ -54,29 +66,23 @@ export const useTrending = () => {
       if (res) {
         dispatch({
           type: 'trending',
-          payload: { trendingList: res.data.items },
+          payload: {
+            trendingList: res.data.items,
+            trendingStatus: 'ok',
+            trendingLoading: false,
+          },
         });
       }
-      dispatch({
-        type: 'setData',
-        payload: { trendingStatus: 'ok', trendingLoading: false },
-      });
     } catch (e) {
       dispatch({
-        type: 'setData',
-        payload: { trendingStatus: 'error', trendingLoading: false },
+        type: 'trending',
+        payload: {
+          trendingList: [],
+          trendingStatus: 'error',
+          trendingLoading: false,
+        },
       });
     }
   };
   return [req];
 };
-// { lang: 'CSS', date: 'yearly' }
-// octokit.request(`GET /search/repositories?q=created:${dayjs().startOf('year').format().replace('+', '%2B')}`, {
-//   sort: 'stars',
-//   order: 'desc',
-// })
-//   .then(res => {
-//     console.log('«30» /components/App/index.tsx ~> ', res);
-//   });
-
-// ttps://api.github.com/search/repositories?q=created:2019-12-13T00:00:00%2B08:00..2020-12-13T00:00:00%2B08:00&sort=stars&order=desc

@@ -21,6 +21,12 @@ const useStyles = makeStyles(() =>
   createStyles({
     head: {
       marginBottom: 20,
+      // position: 'sticky',
+      // top: 0,
+      // zIndex: 1,
+    },
+    body: {
+      paddingBottom: '16px !important',
     },
     color: {
       display: 'inline-block',
@@ -58,29 +64,25 @@ const Header: FC<HeaderProps> = () => {
   const [fetch] = useTrending();
 
   useEffect(() => {
-    fetch({});
+    fetch();
   }, []);
 
-  // const [selectLang, setSelectLang] = React.useState<string>('');
-
-  // const handleSelectLang = (e: object, val: any) => {
-  //   setSelectLang(val as string);
-  // };
-
-  const handleSearch = (e: string) => {
-    console.log('«78» /components/Header/index.tsx ~> ', e);
-    // fetch();
-  };
+  const config = ghState?.config;
 
   const handleSelect = (key: string, val: string) => {
     dispatch({ type: 'config', payload: { [key]: val } });
-    if (key !== 'layout') {
-      // handleSearch();
+    if (key !== 'search.layout') {
+      fetch({ [key]: val });
     }
   };
+
+  if (!config) {
+    return null;
+  }
+
   return (
     <Card className={classes.head}>
-      <CardContent>
+      <CardContent className={classes.body}>
         <Grid
           container
           direction="row"
@@ -95,14 +97,16 @@ const Header: FC<HeaderProps> = () => {
               <Grid item>
                 <GitHubLangs
                   langs={Object.keys(ghColors) as string[]}
-                  onChange={(e) => handleSelect('lang', e)}
+                  onChange={(e) => handleSelect('search.language', e)}
+                  defaultValue={config['search.language']}
                 />
               </Grid>
               <Grid item>
                 <SplitButton
                   className="ghfbtn"
                   extra={<DateRangeIcon fontSize="small" />}
-                  onChange={(e) => handleSelect('range', e)}
+                  onChange={(e) => handleSelect('search.range', e)}
+                  defaultValue={config['search.range']}
                   options={[
                     { label: 'Yearly', value: 'yearly' },
                     { label: 'Monthly', value: 'monthly' },
@@ -115,7 +119,8 @@ const Header: FC<HeaderProps> = () => {
                 <SplitButton
                   className="ghfbtn"
                   options={layoutType}
-                  onChange={(e) => handleSelect('layout', e)}
+                  defaultValue={config['search.layout']}
+                  onChange={(e) => handleSelect('search.layout', e)}
                 />
               </Grid>
             </Grid>
