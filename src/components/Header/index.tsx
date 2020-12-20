@@ -12,7 +12,7 @@ import ListIcon from '@material-ui/icons/ListAltOutlined';
 
 import SplitButton from 'components/SplitButton';
 import GitHubLangs from 'components/GitHubLangs';
-import { useGhState, useGhDispatch, ghColors, useTrending } from 'github';
+import { useGhState, useGhDispatch, ghColors, useTrending, ghLangs } from 'github';
 import LogoIcon from 'assets/logo.png';
 
 import './index.scss';
@@ -96,7 +96,7 @@ const Header: FC<HeaderProps> = () => {
             <Grid item container spacing={1}>
               <Grid item>
                 <GitHubLangs
-                  langs={Object.keys(ghColors) as string[]}
+                  langs={ghLangs}
                   onChange={(e) => handleSelect('search.language', e)}
                   defaultValue={config['search.language']}
                 />

@@ -20,6 +20,10 @@ const RepoLayout = () => {
     return <div style={{ textAlign: 'center', padding: '50px 0', color: '#fff' }}>loading...</div>;
   }
 
+  if (list.length === 0) {
+    return <div style={{ textAlign: 'center', padding: '50px 0', color: '#fff' }}>No Repositories</div>;
+  }
+
   if (type === 'list') {
     return (
       <Paper>

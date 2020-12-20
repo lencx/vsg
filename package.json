@@ -1,8 +1,8 @@
 {
   "name": "vsg",
-  "displayName": "GitHub - Explore & Trending",
+  "displayName": "vsg - GitHub Explore",
   "description": "Explore Github repositories directly from Visual Studio Code.",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "publisher": "lencx",
   "author": "lencx <cxin1314@gmail.com>",
   "license": "MIT",
@@ -21,7 +21,10 @@
   },
   "icon": "public/vsg.png",
   "homepage": "https://github.com/lencx/vsg",
-  "repository": "git@github.com:lencx/vsg.git",
+  "repository": {
+		"type": "git",
+		"url": "https://github.com/lencx/vsg.git"
+	},
   "engines": {
     "vscode": "^1.51.0"
   },
@@ -44,6 +47,15 @@
         "category": "vsg"
       }
     ],
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "vsg-icon",
+          "title": "vsg 🔥 GitHub",
+          "icon": "media/vsg.svg"
+        }
+      ]
+    },
     "configuration": {}
   },
   "dependencies": {

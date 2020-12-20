@@ -6,7 +6,19 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 
 ## Released
 
+### [0.1.1] - 2020-12-20
+
+#### Fixed
+
+- Fixes empty data ui
+
+#### Docs
+
+- add screenshot
+
 ### [0.1.0] - 2020-12-20
+
+#### Added
 
 - github trending
   - search language
