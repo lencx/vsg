@@ -1,4 +1,4 @@
-# vsgh
+# vsg
 
 > Explore Github repositories directly from Visual Studio Code.
 
@@ -8,14 +8,14 @@
 
 ## Extension Settings
 
-- Go to the [`Settings > Personal Access Tokens > New personal access token`](https://github.com/settings/tokens/new?description=vsgh&scopes=public_repo) of your github profile.
+- Go to the [`Settings > Personal Access Tokens > New personal access token`](https://github.com/settings/tokens/new?description=vsg&scopes=public_repo) of your github profile.
 - Click Generate Token.
 - You will be presented with the generated token. Copy the token and add it below.
 
   ```json
-  // .vscode/setting.json
+  // setting.json
   {
-    "vsgh": {
+    "vsg": {
       "token": "xxxxxx"
     }
   }
@@ -25,7 +25,11 @@
 
 Just press Ctrl+P or Cmd+P and type:
 
-> vsgh: Open Github Trending
+> vsg: Open GitHub Explore
+
+## Community
+
+The vsg community can be found on [GitHub Discussions](https://github.com/lencx/vsg/discussions), where you can ask questions, voice ideas.
 
 ## Release Notes
 

@@ -26,7 +26,7 @@ const App: FC<AppProps> = ({ routes }) => {
     // The json data that the extension sent
     const msg: any = event.data;
     if (msg.command === 'configuration') {
-      window.localStorage.setItem('vsgh', JSON.stringify(msg.config));
+      window.localStorage.setItem('vsg', JSON.stringify(msg.config));
       if (msg.config.token) {
         setHasToken(true);
       }
@@ -37,7 +37,7 @@ const App: FC<AppProps> = ({ routes }) => {
 
   useEffect(() => {
     window.addEventListener('message', handleMsg);
-    const config = window.localStorage.getItem('vsgh');
+    const config = window.localStorage.getItem('vsg');
 
     if (config) {
       try {
@@ -61,7 +61,7 @@ const App: FC<AppProps> = ({ routes }) => {
     return (
       <div className="notoken">
         Unable to get the token, please configure{' '}
-        <code>{JSON.stringify({ vsgh: { token: 'xxxxxx' } })}</code> in{' '}
+        <code>{JSON.stringify({ vsg: { token: 'xxxxxx' } })}</code> in{' '}
         <code>setting.json</code>.
       </div>
     );

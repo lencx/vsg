@@ -3,10 +3,10 @@ import * as path from 'path';
 
 export function activate(context: vscode.ExtensionContext) {
   context.subscriptions.push(
-    vscode.commands.registerCommand('vsgh.start', () => {
+    vscode.commands.registerCommand('vsg.start', () => {
       const panel: any = ViewPanel.createOrShow(context.extensionUri);
 
-      const config = vscode.workspace.getConfiguration('vsgh');
+      const config = vscode.workspace.getConfiguration('vsg');
       panel.sendConfig(config);
     })
   );
@@ -155,7 +155,7 @@ class ViewPanel {
 					and only allow scripts that have a specific nonce.
 				-->
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="icon" href="./vsgh.png" />
+        <link rel="icon" href="./vsg.png" />
 				<link href="${mainStyle}" rel="stylesheet">
 				<title>GitHub</title>
 				<base href="${buildPathOnDisk}/">

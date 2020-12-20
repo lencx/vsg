@@ -34,7 +34,7 @@ const transformFilters = (filters: transformFilters) => {
 };
 
 export const useTrending = () => {
-  const data = window.localStorage.getItem('vsgh') || '{}';
+  const data = window.localStorage.getItem('vsg') || '{}';
 
   const octokit = new Octokit({ auth: JSON.parse(data).token });
   const dispatch = useGhDispatch();

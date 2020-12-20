@@ -1,5 +1,5 @@
 {
-  "name": "vsgh",
+  "name": "vsg",
   "displayName": "GitHub - Explore & Trending",
   "description": "Explore Github repositories directly from Visual Studio Code.",
   "version": "0.0.2",
@@ -19,29 +19,29 @@
     "lint": "eslint src --ext ts",
     "eject": "react-scripts eject"
   },
-  "icon": "public/vsgh.png",
-  "homepage": "https://github.com/lencx/vsgh",
-  "repository": "git@github.com:lencx/vsgh.git",
+  "icon": "public/vsg.png",
+  "homepage": "https://github.com/lencx/vsg",
+  "repository": "git@github.com:lencx/vsg.git",
   "engines": {
     "vscode": "^1.51.0"
   },
   "bugs": {
-    "url": "https://github.com/lencx/vsgh/issues"
+    "url": "https://github.com/lencx/vsg/issues"
   },
   "categories": [
     "Other"
   ],
   "activationEvents": [
-    "onCommand:vsgh.start"
+    "onCommand:vsg.start"
   ],
   "main": "./build/ext-src/extension.js",
-  "keywords": ["vscode", "extension", "github", "vsgh", "trending"],
+  "keywords": ["vscode", "extension", "github", "vsg", "trending"],
   "contributes": {
     "commands": [
       {
-        "command": "vsgh.start",
+        "command": "vsg.start",
         "title": "Open Github Explore",
-        "category": "vsgh"
+        "category": "vsg"
       }
     ],
     "configuration": {}
