@@ -34,16 +34,13 @@ const SplitButton: FC<SplitButtonProps> = ({
   const anchorRef = React.useRef<HTMLDivElement>(null);
   const [selectedIndex, setSelectedIndex] = React.useState(1);
 
-  const handleClick = () => {
-    console.info(`You clicked ${options[selectedIndex].value}`);
-  };
-
   const handleMenuItemClick = (
     event: React.MouseEvent<HTMLLIElement, MouseEvent>,
     index: number
   ) => {
     setSelectedIndex(index);
     setOpen(false);
+    onChange && onChange(options[index].value);
   };
 
   const handleToggle = () => {
@@ -104,7 +101,7 @@ const SplitButton: FC<SplitButtonProps> = ({
                   {options.map((option, index) => (
                     <MenuItem
                       key={option.value}
-                      disabled={index === 2}
+                      disabled={option.value === options[selectedIndex].value}
                       selected={index === selectedIndex}
                       onClick={(event) => handleMenuItemClick(event, index)}>
                       {option.label}

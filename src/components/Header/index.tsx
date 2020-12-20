@@ -3,9 +3,8 @@
  * @create_at: Dec 13, 2020
  */
 
-import React, { FC, useEffect } from 'react';
+import React, { memo, FC, useEffect } from 'react';
 import { Avatar, Card, CardContent, Grid } from '@material-ui/core';
-import Autocomplete from '@material-ui/lab/Autocomplete';
 import { makeStyles, createStyles } from '@material-ui/core/styles';
 import DateRangeIcon from '@material-ui/icons/DateRangeOutlined';
 import GridIcon from '@material-ui/icons/GridOnOutlined';
@@ -14,8 +13,7 @@ import ListIcon from '@material-ui/icons/ListAltOutlined';
 import SplitButton from 'components/SplitButton';
 import GitHubLangs from 'components/GitHubLangs';
 import { useGhState, useGhDispatch, ghColors, useTrending } from 'github';
-import { langColors } from 'utils/tools';
-import LogoIcon from './vsgh-logo.png';
+import LogoIcon from 'assets/logo.png';
 
 import './index.scss';
 
@@ -23,9 +21,6 @@ const useStyles = makeStyles(() =>
   createStyles({
     head: {
       marginBottom: 20,
-    },
-    logo: {
-      // display: 'in'
     },
     color: {
       display: 'inline-block',
@@ -58,20 +53,31 @@ export interface HeaderProps {}
 
 const Header: FC<HeaderProps> = () => {
   const classes = useStyles();
-  // const dispatch = useGhDispatch();
-  // const ghState = useGhState();
+  const dispatch = useGhDispatch();
+  const ghState: any = useGhState();
   const [fetch] = useTrending();
 
   useEffect(() => {
     fetch({});
   }, []);
 
-  const [selectLang, setSelectLang] = React.useState<string>('');
+  // const [selectLang, setSelectLang] = React.useState<string>('');
 
-  const handleSelectLang = (e: object, val: any) => {
-    setSelectLang(val as string);
+  // const handleSelectLang = (e: object, val: any) => {
+  //   setSelectLang(val as string);
+  // };
+
+  const handleSearch = (e: string) => {
+    console.log('«78» /components/Header/index.tsx ~> ', e);
+    // fetch();
   };
 
+  const handleSelect = (key: string, val: string) => {
+    dispatch({ type: 'config', payload: { [key]: val } });
+    if (key !== 'layout') {
+      // handleSearch();
+    }
+  };
   return (
     <Card className={classes.head}>
       <CardContent>
@@ -82,17 +88,21 @@ const Header: FC<HeaderProps> = () => {
           alignItems="center"
         >
           <Grid item>
-            <Avatar className={classes.logo} alt="logo" variant="square" src={LogoIcon} />
+            <Avatar alt="logo" variant="square" src={LogoIcon} />
           </Grid>
           <Grid item>
             <Grid item container spacing={1}>
               <Grid item>
-                <GitHubLangs langs={Object.keys(ghColors) as string[]} />
+                <GitHubLangs
+                  langs={Object.keys(ghColors) as string[]}
+                  onChange={(e) => handleSelect('lang', e)}
+                />
               </Grid>
               <Grid item>
                 <SplitButton
                   className="ghfbtn"
                   extra={<DateRangeIcon fontSize="small" />}
+                  onChange={(e) => handleSelect('range', e)}
                   options={[
                     { label: 'Yearly', value: 'yearly' },
                     { label: 'Monthly', value: 'monthly' },
@@ -105,44 +115,15 @@ const Header: FC<HeaderProps> = () => {
                 <SplitButton
                   className="ghfbtn"
                   options={layoutType}
+                  onChange={(e) => handleSelect('layout', e)}
                 />
               </Grid>
             </Grid>
           </Grid>
         </Grid>
-        {/* <Autocomplete
-          id="select-lang"
-          autoHighlight
-          clearOnBlur
-          className="selectRoot"
-          style={{ width: 200 }}
-          options={Object.keys(ghColors) as string[]}
-          classes={{ option: classes.selectLang }}
-          getOptionLabel={(option) => option}
-          onChange={handleSelectLang}
-          value={selectLang}
-          renderOption={(option) => (
-            <>
-              <span
-                className={classes.color}
-                style={{ background: langColors(option) }}
-              />
-              <span className={classes.name}>{option}</span>
-            </>
-          )}
-          renderInput={(params) => (
-            <TextField
-              {...params}
-              label="Choose Languages"
-              margin="normal"
-              InputProps={{ ...params.InputProps, className: classes.input }}
-              // variant="outlined"
-            />
-          )}
-        /> */}
       </CardContent>
     </Card>
   );
 };
 
-export default Header;
+export default memo(Header);

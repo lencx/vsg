@@ -4,11 +4,12 @@
  */
 
 import React, { createContext, useContext, useReducer } from 'react';
-// import set from 'lodash/set';
-// import cloneDeep from 'lodash/cloneDeep';
+import cloneDeep from 'lodash/cloneDeep';
+import set from 'lodash/set';
+import get from 'lodash/get';
 
 type GhAction = {
-  type: 'setData' | 'trending';
+  type: 'setData' | 'config' | 'trending';
   payload: any;
 };
 type GhDispatch = (action: GhAction) => void;
@@ -25,13 +26,18 @@ export const GhContextDispatch = createContext<GhDispatch | undefined>(
 );
 
 const ghReducer = (state: GhState, action: GhAction) => {
+  const _state = cloneDeep(state);
   switch (action.type) {
     // set data
     case 'setData': {
-      return { ...state, ...action.payload };
+      return { ..._state, ...action.payload };
     }
     case 'trending': {
-      return { ...state, ...action.payload };
+      return { ..._state, ...action.payload };
+    }
+    case 'config': {
+      const _val = get(_state, 'config');
+      return set(_state, 'config', { ..._val, ...action.payload });
     }
     default: {
       throw new Error(`Unhandled action type: ${action.type}`);
@@ -40,7 +46,13 @@ const ghReducer = (state: GhState, action: GhAction) => {
 };
 
 const GhProvider = ({ children }: GhProviderProps) => {
-  const [state, dispatch] = useReducer(ghReducer, {});
+  const [state, dispatch] = useReducer(ghReducer, {
+    config: {
+      lang: 'All Languages',
+      range: 'weekly',
+      layout: 'grid',
+    }
+  });
 
   return (
     <GhContext.Provider value={state}>

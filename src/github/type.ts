@@ -21,3 +21,15 @@ export type GhRepo = {
   forks_count: number;
   open_issues_count: number;
 };
+
+export interface RepoInfo {
+  avatar: string;
+  author: string;
+  repoName: string;
+  repoDesc: string;
+  repoURL: string;
+  lang?: string;
+  stars?: number;
+  forks?: number;
+  openIssues?: number;
+}

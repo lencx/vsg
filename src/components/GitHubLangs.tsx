@@ -1,11 +1,10 @@
 /**
  * @author: lencx
- * @create_at: Dec 13, 2020
+ * @create_at: Dec 20, 2020
  */
 
 import React, { FC } from 'react';
 import {
-  useTheme,
   fade,
   makeStyles,
   Theme,
@@ -13,19 +12,11 @@ import {
 } from '@material-ui/core/styles';
 import {
   Popper,
-  Paper,
   Button,
   InputBase,
-  Divider,
-  Chip,
 } from '@material-ui/core';
-// import SettingsIcon from '@material-ui/icons/Settings';
 import FilterListIcon from '@material-ui/icons/FilterList';
-import CloseIcon from '@material-ui/icons/Close';
 import DoneIcon from '@material-ui/icons/Done';
-import IconButton from '@material-ui/core/IconButton';
-// import AddBoxIcon from '@material-ui/icons/AddBox';
-import SearchIcon from '@material-ui/icons/Search';
 import Autocomplete, {
   AutocompleteCloseReason,
 } from '@material-ui/lab/Autocomplete';
@@ -53,17 +44,19 @@ const useStyles = makeStyles((theme: Theme) =>
       padding: '8px 10px',
       fontWeight: 600,
     },
-    inputRoot: {
-      paddingLeft: 10,
-      margin: 10,
-      display: 'flex',
-      alignItems: 'center',
-      width: 'calc(100% - 20px)',
-      boxSizing: 'border-box',
-    },
+    // inputRoot: {
+    //   paddingLeft: 10,
+    //   margin: 10,
+    //   display: 'flex',
+    //   alignItems: 'center',
+    //   width: 'calc(100% - 20px)',
+    //   boxSizing: 'border-box',
+    // },
     inputBase: {
-      width: '100%',
+      // width: '100%',
       // borderBottom: '1px solid #dfe2e5',
+      width: 'calc(100% - 40px)',
+      margin: '10px 20px',
       '& input': {
         borderRadius: 4,
         backgroundColor: theme.palette.common.white,
@@ -122,54 +115,27 @@ const useStyles = makeStyles((theme: Theme) =>
       width: 18,
       height: 18,
     },
-    searchIco: {
-      padding: 10,
-    },
-    tag: {
-      height: 24,
-      border: 'solid 2px rgba(27, 31, 35, 0.1)',
-      background: '#fff',
-      // display: 'flex',
-      // justifyContent: 'center',
-      // flexWrap: 'wrap',
-      margin: '0 2px 2px 0',
-      '& > *': {
-        fontSize: '0.7rem',
-        paddingLeft: 8,
-        // color: '#fff',
-        // margin: theme.spacing(0.5),
-      },
-      '& .MuiChip-label': {
-        paddingRight: 0,
-      },
-      '& .MuiSvgIcon-root.MuiChip-deleteIcon': {
-        marginRight: 0,
-      },
-    },
+    all: {
+      fontSize: 14,
+      display: 'inline-block',
+      width: 22,
+    }
   })
 );
 
 export interface GitHubLangsProps {
   langs: string[];
+  onChange?: (value: string) => void;
 }
 
 const GitHubLangs: FC<GitHubLangsProps> = (props) => {
-  const { langs } = props;
+  const { langs, onChange } = props;
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
-  const [value, setValue] = React.useState<string[]>([]);
-  // const theme = useTheme();
+  const [value, setValue] = React.useState<string>('All Languages');
 
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
-  };
-
-  const handleSearch = () => {
-    // console.log('«208» /components/GitHubLangs/index.tsx ~> ', value);
-    if (anchorEl) {
-      anchorEl.focus();
-    }
-    setAnchorEl(null);
   };
 
   const handleClose = (
@@ -179,17 +145,8 @@ const GitHubLangs: FC<GitHubLangsProps> = (props) => {
     if (reason === 'toggleInput') {
       return;
     }
-    handleSearch();
-    // setValue(pendingValue);
-    // if (anchorEl) {
-    //   anchorEl.focus();
-    // }
-    // setAnchorEl(null);
-  };
-
-  const handleRemove = (val: string) => {
-    const result = value.filter((i) => i !== val);
-    setValue(result);
+    anchorEl && anchorEl.focus();
+    setAnchorEl(null);
   };
 
   const open = Boolean(anchorEl);
@@ -205,7 +162,7 @@ const GitHubLangs: FC<GitHubLangsProps> = (props) => {
         size="small"
         color="primary">
         <FilterListIcon fontSize="small" />
-        <span className={classes.langbtn}>Languages</span>
+        <span className={classes.langbtn}>{value || 'selecting'}</span>
       </Button>
       <Popper
         id={id}
@@ -217,7 +174,7 @@ const GitHubLangs: FC<GitHubLangsProps> = (props) => {
         <Autocomplete
           open
           onClose={handleClose}
-          multiple
+          // multiple
           classes={{
             paper: classes.paper,
             option: classes.option,
@@ -225,84 +182,43 @@ const GitHubLangs: FC<GitHubLangsProps> = (props) => {
           }}
           value={value}
           onChange={(event, newValue) => {
-            setValue(newValue);
+            const val = newValue as string;
+            if (val !== value) {
+              setValue(val);
+              onChange && onChange(val);
+            }
           }}
-          disableCloseOnSelect
+          // disableCloseOnSelect
           disablePortal
           renderTags={() => null}
           noOptionsText="No Languages"
           renderOption={(option, { selected }) => (
             <>
-              <DoneIcon
-                className={classes.iconSelected}
-                style={{ visibility: selected ? 'visible' : 'hidden' }}
-              />
-              <span
+              {option !== 'All Languages' ? <span
                 className={classes.color}
                 style={{ backgroundColor: langColors(option) }}
-              />
+              /> : <span className={classes.all}>❖</span>}
               <div className={classes.text}>{option}</div>
-              <CloseIcon
-                className={classes.close}
+              <DoneIcon
+                color="primary"
+                className={classes.iconSelected}
                 style={{ visibility: selected ? 'visible' : 'hidden' }}
               />
             </>
           )}
-          options={[...langs].sort((a, b) => {
-            // Display the selected langs first.
-            let ai = value.indexOf(a);
-            ai = ai === -1 ? value.length + langs.indexOf(a) : ai;
-            let bi = value.indexOf(b);
-            bi = bi === -1 ? value.length + langs.indexOf(b) : bi;
-            return ai - bi;
-          })}
+          options={['All Languages', ...langs]}
           getOptionLabel={(option) => option}
+          // disabled={}
           renderInput={(params) => {
             return (
               <div>
-                <Paper className={classes.inputRoot}>
-                  <InputBase
-                    ref={params.InputProps.ref}
-                    inputProps={params.inputProps}
-                    autoFocus
-                    className={classes.inputBase}
-                    placeholder="Filter languages"
-                  />
-                  {/* <IconButton size="small" className={classes.searchIco} aria-label="add">
-                    <AddBoxIcon />
-                  </IconButton> */}
-                  <IconButton className={classes.searchIco} aria-label="search">
-                    <SearchIcon onClick={handleSearch} />
-                  </IconButton>
-                </Paper>
-                <div style={{ margin: 10 }}>
-                  {value.map((lang) => (
-                    <Chip
-                      key={lang}
-                      label={lang}
-                      style={{
-                        borderColor:
-                          langColors(lang) === '#fff'
-                            ? '#d2d2d2'
-                            : langColors(lang),
-                      }}
-                      className={classes.tag}
-                      // deleteIcon={<DoneIcon />}
-                      onDelete={() => handleRemove(lang)}
-                    />
-                    // <span
-                    //   key={lang}
-                    //   className={classes.tag}
-                    //   style={{
-                    //     backgroundColor: langColors(lang),
-                    //     color: theme.palette.getContrastText(langColors(lang)),
-                    //   }}
-                    // >
-                    //   {lang}
-                    // </span>
-                  ))}
-                </div>
-                <Divider />
+                <InputBase
+                  ref={params.InputProps.ref}
+                  inputProps={params.inputProps}
+                  autoFocus
+                  className={classes.inputBase}
+                  placeholder="Filter languages"
+                />
               </div>
             );
           }}

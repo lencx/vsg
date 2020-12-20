@@ -13,16 +13,17 @@ import {
   IconButton,
   Button,
   Tooltip,
-  Chip,
 } from '@material-ui/core';
 import { makeStyles, createStyles } from '@material-ui/core/styles';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 
+import GhBtn from 'components/GhBtn';
 import RepoIcon from 'components/Icons/RepoIcon';
 import StarsIcon from 'components/Icons/StarsIcon';
 import ForksIcon from 'components/Icons/ForksIcon';
 import IssuesIcon from 'components/Icons/IssuesIcon';
 import { langColors } from 'utils/tools';
+import { RepoInfo } from 'github/type';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -70,44 +71,10 @@ const useStyles = makeStyles(() =>
       minWidth: 20,
       marginRight: 30,
     },
-    ghbtn: {
-      fontSize: '0.7rem',
-      border: 'none',
-      marginLeft: 10,
-      color: '#666',
-    },
   })
 );
 
-export interface RepoCardProps {
-  avatar: string;
-  author: string;
-  repoName: string;
-  repoDesc: string;
-  repoURL: string;
-  lang?: string;
-  stars?: number;
-  forks?: number;
-  openIssues?: number;
-}
-export interface GhBtnProps {
-  className?: string;
-  icon?: React.ReactElement;
-  count?: number;
-}
-
-const GhBtn: FC<GhBtnProps> = ({ icon, count }) => {
-  const classes = useStyles();
-  return count ? (
-    <Chip
-      className={classes.ghbtn}
-      size="small"
-      avatar={icon}
-      variant="outlined"
-      label={<b>{count}</b>}
-    />
-  ) : null;
-};
+export interface RepoCardProps extends RepoInfo {}
 
 const RepoCard: FC<RepoCardProps> = (props) => {
   const {
